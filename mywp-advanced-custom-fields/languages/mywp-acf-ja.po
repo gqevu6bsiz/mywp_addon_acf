@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: My WP Add-on Advanced Custom FieldsO\n"
+"POT-Creation-Date: 2020-08-28 00:52+0900\n"
+"PO-Revision-Date: 2020-08-28 00:54+0900\n"
+"Last-Translator: gqevu6bsiz <gqevu6bsiz@gmail.com>\n"
+"Language-Team: gqevu6bsiz@gmail.com\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: controller/modules/mywp.controller.module.updater.php:106
+#: controller/modules/mywp.controller.module.updater.php:143
+msgid "Connection lost or the server is busy. Please try again later."
+msgstr ""
+"サーバに接続できませんでした。 時間をおいてもう一度お試しください。"
+
+#: controller/modules/mywp.controller.module.updater.php:137
+#: controller/modules/mywp.controller.module.updater.php:153
+msgid "An error has occurred. Please reload the page and try again."
+msgstr ""
+"予期しないエラーが発生しました。ページをリロードして、もう一度お試し"
+"ください。"
+
+#: controller/modules/mywp.controller.module.updater.php:189
+msgid "Invalid remote Json data. Please try again."
+msgstr ""
+"リモートのJsonデータエラー。 約1時間後に、もう一度お試しください。"
+
+#: controller/modules/mywp.controller.module.updater.php:199
+msgid "Invalid results. Sorry maybe update format changed."
+msgstr "形式エラー。アップデートの形式が変更された可能性があります。"
+
+#. Description of the plugin/theme
+msgid "My WP Add-on Advanced Custom Fields customize for My WP."
+msgstr ""
+"My WP Add-on Advanced Custom Fields はAdvanced Custom Fieldsのカスタ"
+"マイズを行います。"
