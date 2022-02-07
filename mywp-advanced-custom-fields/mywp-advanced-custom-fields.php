@@ -3,13 +3,13 @@
 Plugin Name: My WP Add-on Advanced Custom Fields
 Plugin URI: https://mywpcustomize.com/add_ons/my-wp-add-on-acf/
 Description: My WP Add-on Advanced Custom Fields is customize for Posts and setting Posts on My WP.
-Version: 1.1
+Version: 1.2.0
 Author: gqevu6bsiz
 Author URI: http://gqevu6bsiz.chicappa.jp/
 Text Domain: mywp-acf
 Domain Path: /languages
-My WP Test working: 1.14
-ACF Test working: 5.9.1
+My WP Test working: 1.19
+ACF Test working: 5.11.4
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,26 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'MywpACF' ) ) :
 
 final class MywpACF {
-
-  private static $instance;
-
-  private function __construct() {}
-
-  public static function get_instance() {
-
-    if ( !isset( self::$instance ) ) {
-
-      self::$instance = new self();
-
-    }
-
-    return self::$instance;
-
-  }
-
-  private function __clone() {}
-
-  private function __wakeup() {}
 
   public static function init() {
 
@@ -52,7 +32,7 @@ final class MywpACF {
   private static function define_constants() {
 
     define( 'MYWP_ACF_NAME' , 'My WP Add-On Advanced Custom Fields' );
-    define( 'MYWP_ACF_VERSION' , '1.1' );
+    define( 'MYWP_ACF_VERSION' , '1.2.0' );
     define( 'MYWP_ACF_PLUGIN_FILE' , __FILE__ );
     define( 'MYWP_ACF_PLUGIN_BASENAME' , plugin_basename( MYWP_ACF_PLUGIN_FILE ) );
     define( 'MYWP_ACF_PLUGIN_DIRNAME' , dirname( MYWP_ACF_PLUGIN_BASENAME ) );
@@ -75,11 +55,15 @@ final class MywpACF {
 
     add_action( 'init' , array( __CLASS__ , 'wp_init' ) );
 
+    add_filter( 'mywp_debug_types' , array( __CLASS__ , 'mywp_debug_types' ) );
+
   }
 
   public static function mywp_plugins_loaded() {
 
     add_filter( 'mywp_controller_plugins_loaded_include_modules' , array( __CLASS__ , 'mywp_controller_plugins_loaded_include_modules' ) );
+
+    add_filter( 'mywp_developer_plugins_loaded_include_modules' , array( __CLASS__ , 'mywp_developer_plugins_loaded_include_modules' ) );
 
   }
 
@@ -98,6 +82,24 @@ final class MywpACF {
     $includes['acf_controller']   = $dir . 'mywp.controller.module.acf.php';
 
     return $includes;
+
+  }
+
+  public static function mywp_developer_plugins_loaded_include_modules( $includes ) {
+
+    $dir = MYWP_ACF_PLUGIN_PATH . 'developer/modules/';
+
+    $includes['acf_field_group'] = $dir . 'mywp.developer.module.acf.field-group.php';
+
+    return $includes;
+
+  }
+
+  public static function mywp_debug_types( $debug_types ) {
+
+    $debug_types['acf'] = __( 'ACF' , 'my-wp' );
+
+    return $debug_types;
 
   }
 

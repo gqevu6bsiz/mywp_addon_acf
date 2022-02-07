@@ -1,42 +1,73 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: My WP Add-on Advanced Custom FieldsO\n"
-"POT-Creation-Date: 2020-08-28 00:52+0900\n"
-"PO-Revision-Date: 2020-08-28 00:54+0900\n"
+"POT-Creation-Date: 2022-02-07 11:44+0900\n"
+"PO-Revision-Date: 2022-02-07 11:56+0900\n"
 "Last-Translator: gqevu6bsiz <gqevu6bsiz@gmail.com>\n"
 "Language-Team: gqevu6bsiz@gmail.com\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: .\n"
 
-#: controller/modules/mywp.controller.module.updater.php:106
-#: controller/modules/mywp.controller.module.updater.php:143
+#: controller/modules/mywp.controller.module.main.general.php:87
+msgid "Documents"
+msgstr "ドキュメント"
+
+#: controller/modules/mywp.controller.module.updater.php:110
+#: controller/modules/mywp.controller.module.updater.php:147
 msgid "Connection lost or the server is busy. Please try again later."
-msgstr ""
-"サーバに接続できませんでした。 時間をおいてもう一度お試しください。"
+msgstr "サーバに接続できませんでした。 時間をおいてもう一度お試しください。"
 
-#: controller/modules/mywp.controller.module.updater.php:137
-#: controller/modules/mywp.controller.module.updater.php:153
+#: controller/modules/mywp.controller.module.updater.php:141
+#: controller/modules/mywp.controller.module.updater.php:157
 msgid "An error has occurred. Please reload the page and try again."
 msgstr ""
-"予期しないエラーが発生しました。ページをリロードして、もう一度お試し"
-"ください。"
+"予期しないエラーが発生しました。ページをリロードして、もう一度お試しくださ"
+"い。"
 
-#: controller/modules/mywp.controller.module.updater.php:189
+#: controller/modules/mywp.controller.module.updater.php:193
 msgid "Invalid remote Json data. Please try again."
-msgstr ""
-"リモートのJsonデータエラー。 約1時間後に、もう一度お試しください。"
+msgstr "リモートのJsonデータエラー。 約1時間後に、もう一度お試しください。"
 
-#: controller/modules/mywp.controller.module.updater.php:199
+#: controller/modules/mywp.controller.module.updater.php:203
 msgid "Invalid results. Sorry maybe update format changed."
 msgstr "形式エラー。アップデートの形式が変更された可能性があります。"
 
+#: developer/modules/mywp.developer.module.acf.field-group.php:21
+#: developer/modules/mywp.developer.module.acf.field-group.php:98
+msgid "Field Groups"
+msgstr "フィールドグループ"
+
+#: developer/modules/mywp.developer.module.acf.field-group.php:43
+msgid "Field groups debug on only the post edit screen."
+msgstr "フィールドグループのデバッグは投稿編集画面でのみできます。"
+
+#: developer/modules/mywp.developer.module.acf.field-group.php:51
+msgid "Post not found."
+msgstr "投稿が見つかりません。"
+
+#: developer/modules/mywp.developer.module.acf.field-group.php:84
+msgid "Empty current Field group."
+msgstr "フィールドグループが見つかりません。"
+
+#: developer/modules/mywp.developer.module.acf.field-group.php:100
+msgid "Fields"
+msgstr "フィールド"
+
+#: mywp-advanced-custom-fields.php:100
+msgid "ACF"
+msgstr "ACF"
+
 #. Description of the plugin/theme
-msgid "My WP Add-on Advanced Custom Fields customize for My WP."
+#, fuzzy
+#| msgid "My WP Add-on Advanced Custom Fields customize for My WP."
+msgid ""
+"My WP Add-on Advanced Custom Fields is customize for Posts and setting Posts "
+"on My WP."
 msgstr ""
-"My WP Add-on Advanced Custom Fields はAdvanced Custom Fieldsのカスタ"
-"マイズを行います。"
+"My WP Add-on Advanced Custom Fields はAdvanced Custom Fieldsのカスタマイズを"
+"行います。"

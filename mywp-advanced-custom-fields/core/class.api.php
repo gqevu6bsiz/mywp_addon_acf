@@ -8,32 +8,13 @@ if ( ! class_exists( 'MywpACFApi' ) ) :
 
 final class MywpACFApi {
 
-  private static $instance;
-
-  private function __construct() {}
-
-  public static function get_instance() {
-
-    if ( !isset( self::$instance ) ) {
-
-      self::$instance = new self();
-
-    }
-
-    return self::$instance;
-
-  }
-
-  private function __clone() {}
-
-  private function __wakeup() {}
-
   public static function plugin_info() {
 
     $plugin_info = array(
       'document_url' => 'https://mywpcustomize.com/add_ons/my-wp-add-on-acf/',
       'website_url' => 'https://mywpcustomize.com/',
       'github' => 'https://github.com/gqevu6bsiz/mywp_addon_acf',
+      'github_raw' => 'https://raw.githubusercontent.com/gqevu6bsiz/mywp_addon_acf/',
       'github_tags' => 'https://api.github.com/repos/gqevu6bsiz/mywp_addon_acf/tags',
     );
 
@@ -69,7 +50,13 @@ final class MywpACFApi {
 
     $acf_field_type = $acf_field['type'];
 
-    $acf_field_name = $acf_field['name'];
+    $acf_field_name = '';
+
+    if( ! empty( $acf_field['name'] ) ) {
+
+      $acf_field_name = $acf_field['name'];
+
+    }
 
     $filter_content = apply_filters( 'mywp_acf_print_field_column' , '' , $column_id , $post_id , $acf_field );
 

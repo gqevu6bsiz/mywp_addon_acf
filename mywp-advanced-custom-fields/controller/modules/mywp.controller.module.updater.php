@@ -70,7 +70,11 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
       'plugin' => MYWP_ACF_PLUGIN_BASENAME,
       'new_version' => $latest,
       'url' => $plugin_info['github'],
-      'package' => false,
+      'package' => $plugin_info['github_raw'] . $latest . '/' . MYWP_ACF_PLUGIN_DIRNAME . '.zip',
+      'icons' => array(),
+      'banners' => array(),
+      'banners_rtl' => array(),
+      'requires' => false,
       'tested' => false,
       'compatibility' => false,
     );

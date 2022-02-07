@@ -66,9 +66,9 @@ final class MywpControllerModuleACFMainGeneral extends MywpControllerAbstractMod
 
     add_filter( 'plugin_row_meta' , array( __CLASS__ , 'plugin_row_meta' ) , 10 , 4 );
 
-    add_action( 'in_plugin_update_message-' . MYWP_ACF_PLUGIN_BASENAME , array( __CLASS__ , 'in_plugin_update_message' ) , 10 , 2 );
+    //add_action( 'in_plugin_update_message-' . MYWP_ACF_PLUGIN_BASENAME , array( __CLASS__ , 'in_plugin_update_message' ) , 10 , 2 );
 
-    add_action( 'admin_print_footer_scripts' , array( __CLASS__ , 'admin_print_footer_scripts' ) );
+    //add_action( 'admin_print_footer_scripts' , array( __CLASS__ , 'admin_print_footer_scripts' ) );
 
   }
 
@@ -94,6 +94,7 @@ final class MywpControllerModuleACFMainGeneral extends MywpControllerAbstractMod
 
   }
 
+  /*
   public static function in_plugin_update_message( $plugin_data , $response ) {
 
     if( empty( $response->new_version ) ) {
@@ -122,6 +123,7 @@ final class MywpControllerModuleACFMainGeneral extends MywpControllerAbstractMod
     echo '</style>';
 
   }
+  */
 
 }
 
