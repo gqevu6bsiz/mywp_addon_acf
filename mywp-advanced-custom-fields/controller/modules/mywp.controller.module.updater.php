@@ -14,13 +14,15 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
 
   static protected $id = 'acf_updater';
 
-  static private $schedule_hook = 'acf_version_check';
+  static private $schedule_hook = 'mywp_acf_version_check';
 
   protected static function after_init() {
 
     add_filter( 'mywp_controller_pre_get_model_' . self::$id , array( __CLASS__ , 'mywp_controller_pre_get_model' ) );
 
     add_filter( 'site_transient_update_plugins' , array( __CLASS__ , 'site_transient_update_plugins' ) );
+
+    add_filter( 'plugins_api' , array( __CLASS__ , 'plugins_api' ) , 10 , 3 );
 
   }
 
@@ -64,13 +66,21 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
 
     $plugin_info = MywpACFApi::plugin_info();
 
+    $remote = self::get_remote();
+
+    if( empty( $remote ) or is_wp_error( $remote ) ) {
+
+      return $site_transient;
+
+    }
+
     $update_plugin = array(
       'id' => MYWP_ACF_PLUGIN_BASENAME,
       'slug' => MYWP_ACF_PLUGIN_DIRNAME,
       'plugin' => MYWP_ACF_PLUGIN_BASENAME,
       'new_version' => $latest,
       'url' => $plugin_info['github'],
-      'package' => $plugin_info['github_raw'] . $latest . '/' . MYWP_ACF_PLUGIN_DIRNAME . '.zip',
+      'package' => self::get_remote_download_link(),
       'icons' => array(),
       'banners' => array(),
       'banners_rtl' => array(),
@@ -103,7 +113,7 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
 
     $error = new WP_Error();
 
-    $remote_result = wp_remote_get( $plugin_info['github_tags'] , $remote_args );
+    $remote_result = wp_remote_get( $plugin_info['github_release_latest'] , $remote_args );
 
     if( empty( $remote_result ) ) {
 
@@ -164,6 +174,58 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
 
   }
 
+  private static function get_remote_download_link() {
+
+    $remote = self::get_remote();
+
+    if( empty( $remote ) or is_wp_error( $remote ) ) {
+
+      return false;
+
+    }
+
+    $maybe_remote_json = json_decode( $remote );
+
+    if( empty( $maybe_remote_json->assets ) or ! is_array( $maybe_remote_json->assets ) ) {
+
+      return false;
+
+    }
+
+    $download_link = '';
+
+    $download_file_path = sprintf( '%s.%s.zip' , MYWP_ACF_PLUGIN_DIRNAME , self::get_latest() );
+
+    foreach( $maybe_remote_json->assets as $asset ) {
+
+      if( ! isset( $asset->name ) ) {
+
+        continue;
+
+      }
+
+      if( $asset->name !== $download_file_path ) {
+
+        continue;
+
+      }
+
+      if( empty( $asset->browser_download_url ) ) {
+
+        continue;
+
+      }
+
+      $download_link = $asset->browser_download_url;
+
+      break;
+
+    }
+
+    return $download_link;
+
+  }
+
   public static function get_latest() {
 
     $transient_key = 'mywp_' . self::$id;
@@ -188,7 +250,7 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
 
     $maybe_remote_json = json_decode( $remote );
 
-    if( ! is_array( $maybe_remote_json ) or empty( $maybe_remote_json[0] ) ) {
+    if( ! is_object( $maybe_remote_json ) or ! isset( $maybe_remote_json->tag_name ) ) {
 
       $error->add( 'invalid_remote_json' , __( 'Invalid remote Json data. Please try again.' , 'mywp-acf' ) );
 
@@ -196,17 +258,7 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
 
     }
 
-    $remote_json = $maybe_remote_json[0];
-
-    if( ! is_object( $remote_json ) or ! isset( $remote_json->name ) or ! isset( $remote_json->zipball_url ) or ! isset( $remote_json->tarball_url ) ) {
-
-      $error->add( 'invalid_json' , __( 'Invalid results. Sorry maybe update format changed.' , 'mywp-acf' ) );
-
-      return $error;
-
-    }
-
-    $latest = $remote_json->name;
+    $latest = $maybe_remote_json->tag_name;
 
     $transient = array( 'latest' => $latest );
 
@@ -239,6 +291,91 @@ final class MywpControllerModuleACFUpdater extends MywpControllerAbstractModule 
     $latest_compare = version_compare( $latest , MYWP_ACF_VERSION , '<=' );
 
     return $latest_compare;
+
+  }
+
+  public static function plugins_api( $false , $action , $args ) {
+
+    if( ! in_array( $action , array( 'query_plugins' , 'plugin_information' ) , true ) ) {
+
+      return $false;
+
+    }
+
+    if( empty( $args->slug ) ) {
+
+      return $false;
+
+    }
+
+    if( $args->slug !== MYWP_ACF_PLUGIN_DIRNAME ) {
+
+      return $false;
+
+    }
+
+    $remote = self::get_remote();
+
+    if( empty( $remote ) or is_wp_error( $remote ) ) {
+
+      return $false;
+
+    }
+
+    $maybe_remote_json = json_decode( $remote );
+
+    if( ! is_object( $maybe_remote_json ) or ! isset( $maybe_remote_json->tag_name ) ) {
+
+      return $false;
+
+    }
+
+    $plugin_info = MywpACFApi::plugin_info();
+
+    $plugin_api = array(
+      'name' => MYWP_ACF_NAME,
+      'slug' => MYWP_ACF_PLUGIN_BASENAME,
+      'version' => self::get_latest(),
+      'author' => sprintf( '<a href="%s" target="_blank">%s</a>' , esc_url( $plugin_info['document_url'] ) , esc_html( 'gqevu6bsiz' ) ),
+      'author_profile' => $plugin_info['website_url'],
+      //'contributors' => array(),
+      //'requires' => '',
+      //'tested' => '',
+      //'requires_php' => '',
+      //'requires_plugins' => array(),
+      //'rating' => '',
+      //'ratings' => array(),
+      //'num_ratings' => '',
+      //'support_url' => '',
+      //'support_threads' => '',
+      //'support_threads_resolved' => '',
+      //'active_installs' => '',
+      'last_updated' => $maybe_remote_json->published_at,
+      //'added' => '',
+      'homepage' => $plugin_info['website_url'],
+      'sections' => array(
+        //'description' => '',
+        //'faq' => '',
+        'changelog' => sprintf( '<a href="%s" target="_blank">%s</a>' , esc_url( $plugin_info['github_releases'] ) , esc_html( 'See Releases.' ) ),
+        //'screenshots' => '',
+        //'reviews' => '',
+      ),
+      'download_link' => self::get_remote_download_link(),
+      //'upgrade_notice' => array(),
+      //'screenshots' => array(),
+      //'tags' => array(),
+      //'versions' => array(),
+      //'business_model' => '',
+      //'repository_url' => $plugin_info['github'],
+      //'commercial_support_url' => '',
+      //'donate_link' => '',
+      //'banners' => array(),
+      //'preview_link' => '',
+    );
+
+    $result = (object) $plugin_api;
+
+    return $result;
 
   }
 

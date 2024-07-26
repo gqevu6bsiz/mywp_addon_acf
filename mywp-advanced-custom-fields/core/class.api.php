@@ -14,8 +14,8 @@ final class MywpACFApi {
       'document_url' => 'https://mywpcustomize.com/add_ons/my-wp-add-on-acf/',
       'website_url' => 'https://mywpcustomize.com/',
       'github' => 'https://github.com/gqevu6bsiz/mywp_addon_acf',
-      'github_raw' => 'https://raw.githubusercontent.com/gqevu6bsiz/mywp_addon_acf/',
-      'github_tags' => 'https://api.github.com/repos/gqevu6bsiz/mywp_addon_acf/tags',
+      'github_releases' => 'https://github.com/gqevu6bsiz/mywp_addon_acf/releases',
+      'github_release_latest' => 'https://api.github.com/repos/gqevu6bsiz/mywp_addon_acf/releases/latest',
     );
 
     $plugin_info = apply_filters( 'mywp_acf_plugin_info' , $plugin_info );
