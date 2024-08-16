@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: My WP Add-on Advanced Custom Fields\n"
-"POT-Creation-Date: 2022-02-07 11:44+0900\n"
+"POT-Creation-Date: 2024-08-16 13:31+0900\n"
 "PO-Revision-Date: 2017-12-24 21:21+0900\n"
 "Last-Translator: \n"
 "Language-Team: info@mywpcustomize.com\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: mywp-advanced-custom-fields.php\n"
@@ -25,26 +25,38 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: controller/modules/mywp.controller.module.updater.php:110
-#: controller/modules/mywp.controller.module.updater.php:147
+#: controller/modules/mywp.controller.module.posts.php:308
+msgid "Unchecked"
+msgstr ""
+
+#: controller/modules/mywp.controller.module.posts.php:309
+msgid "Checked"
+msgstr ""
+
+#: controller/modules/mywp.controller.module.posts.php:393
+msgid "From"
+msgstr ""
+
+#: controller/modules/mywp.controller.module.posts.php:398
+msgid "To"
+msgstr ""
+
+#: controller/modules/mywp.controller.module.updater.php:120
+#: controller/modules/mywp.controller.module.updater.php:157
 msgid "Connection lost or the server is busy. Please try again later."
 msgstr ""
 
-#: controller/modules/mywp.controller.module.updater.php:141
-#: controller/modules/mywp.controller.module.updater.php:157
+#: controller/modules/mywp.controller.module.updater.php:151
+#: controller/modules/mywp.controller.module.updater.php:167
 msgid "An error has occurred. Please reload the page and try again."
 msgstr ""
 
-#: controller/modules/mywp.controller.module.updater.php:193
+#: controller/modules/mywp.controller.module.updater.php:255
 msgid "Invalid remote Json data. Please try again."
 msgstr ""
 
-#: controller/modules/mywp.controller.module.updater.php:203
-msgid "Invalid results. Sorry maybe update format changed."
-msgstr ""
-
 #: developer/modules/mywp.developer.module.acf.field-group.php:21
-#: developer/modules/mywp.developer.module.acf.field-group.php:98
+#: developer/modules/mywp.developer.module.acf.field-group.php:102
 msgid "Field Groups"
 msgstr ""
 
@@ -56,15 +68,19 @@ msgstr ""
 msgid "Post not found."
 msgstr ""
 
-#: developer/modules/mywp.developer.module.acf.field-group.php:84
-msgid "Empty current Field group."
+#: developer/modules/mywp.developer.module.acf.field-group.php:59
+msgid "ACF is not activated."
 msgstr ""
 
-#: developer/modules/mywp.developer.module.acf.field-group.php:100
+#: developer/modules/mywp.developer.module.acf.field-group.php:88
+msgid "Empty current ACF Field group."
+msgstr ""
+
+#: developer/modules/mywp.developer.module.acf.field-group.php:104
 msgid "Fields"
 msgstr ""
 
-#: mywp-advanced-custom-fields.php:100
+#: mywp-advanced-custom-fields.php:101
 msgid "ACF"
 msgstr ""
 

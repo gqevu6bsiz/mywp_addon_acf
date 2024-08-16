@@ -54,34 +54,38 @@ final class MywpDeveloperModuleAcfFieldgroup extends MywpDeveloperAbstractModule
 
     }
 
-    $current_field_groups = array();
+    if( ! MywpACFApi::is_enable_acf() ) {
 
-    $field_groups = acf_get_field_groups();
+      printf( '<p>%s</p>' , __( 'ACF is not activated.' , 'mywp-acf' ) );
 
-    foreach( $field_groups as $field_group ) {
+      return false;
 
-      if( ! empty( $field_groups ) ) {
+    }
 
-        $acf_get_field_group_visibility_args = array(
-          'post_id'	=> $post->ID,
-          'post_type'	=> $post->post_type,
-        );
+    $current_acf_field_groups = array();
 
-        $visibility = acf_get_field_group_visibility( $field_group , array( 'post_id'	=> $post->ID , 'post_type'	=> $post->post_type ) );
+    $acf_field_groups = MywpACFApi::get_acf_field_groups();
 
-        if( $visibility ) {
+    foreach( $acf_field_groups as $acf_field_group ) {
 
-          $current_field_groups[] = $field_group;
+      $acf_get_field_group_visibility_args = array(
+        'post_id'	=> $post->ID,
+        'post_type'	=> $post->post_type,
+      );
 
-        }
+      $visibility = acf_get_field_group_visibility( $acf_field_group , array( 'post_id'	=> $post->ID , 'post_type'	=> $post->post_type ) );
+
+      if( $visibility ) {
+
+        $current_acf_field_groups[] = $acf_field_group;
 
       }
 
     }
 
-    if( empty( $current_field_groups ) ) {
+    if( empty( $current_acf_field_groups ) ) {
 
-      printf( '<p>%s</p>' , __( 'Empty current Field group.' , 'mywp-acf' ) );
+      printf( '<p>%s</p>' , __( 'Empty current ACF Field group.' , 'mywp-acf' ) );
 
       return false;
 
@@ -105,17 +109,17 @@ final class MywpDeveloperModuleAcfFieldgroup extends MywpDeveloperAbstractModule
 
     echo '<tbody>';
 
-    foreach( $current_field_groups as $field_group ) {
+    foreach( $current_acf_field_groups as $acf_field_group ) {
 
       echo '<tr>';
 
-      printf( '<th>[%s] %s<br />%s</th>' , $field_group['ID'] , $field_group['key'] , $field_group['title'] );
+      printf( '<th>[%s] %s<br />%s</th>' , esc_html( $acf_field_group['ID'] ) , esc_html( $acf_field_group['key'] ) , esc_html( $acf_field_group['title'] ) );
 
       echo '<td>';
 
       echo '<textarea readonly="readonly">';
 
-      print_r( $field_group );
+      print_r( $acf_field_group );
 
       echo '</textarea>';
 
@@ -123,7 +127,7 @@ final class MywpDeveloperModuleAcfFieldgroup extends MywpDeveloperAbstractModule
 
       echo '<td>';
 
-      $fields = acf_get_fields( $field_group );
+      $fields = acf_get_fields( $acf_field_group );
 
       if( ! empty( $fields ) ) {
 

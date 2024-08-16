@@ -3,12 +3,12 @@
 Plugin Name: My WP Add-on Advanced Custom Fields
 Plugin URI: https://mywpcustomize.com/add_ons/my-wp-add-on-acf/
 Description: My WP Add-on Advanced Custom Fields is customize for Posts and setting Posts on My WP.
-Version: 1.2.1
+Version: 1.3.0
 Author: gqevu6bsiz
 Author URI: https://mywpcustomize.com/
 Text Domain: mywp-acf
 Domain Path: /languages
-My WP Test working: 1.23
+My WP Test working: 1.24
 ACF Test working: 6.3
 */
 
@@ -32,7 +32,7 @@ final class MywpACF {
   private static function define_constants() {
 
     define( 'MYWP_ACF_NAME' , 'My WP Add-On Advanced Custom Fields' );
-    define( 'MYWP_ACF_VERSION' , '1.2.1' );
+    define( 'MYWP_ACF_VERSION' , '1.3.0' );
     define( 'MYWP_ACF_PLUGIN_FILE' , __FILE__ );
     define( 'MYWP_ACF_PLUGIN_BASENAME' , plugin_basename( MYWP_ACF_PLUGIN_FILE ) );
     define( 'MYWP_ACF_PLUGIN_DIRNAME' , dirname( MYWP_ACF_PLUGIN_BASENAME ) );
@@ -77,9 +77,10 @@ final class MywpACF {
 
     $dir = MYWP_ACF_PLUGIN_PATH . 'controller/modules/';
 
-    $includes['acf_main_general'] = $dir . 'mywp.controller.module.main.general.php';
-    $includes['acf_updater']      = $dir . 'mywp.controller.module.updater.php';
-    $includes['acf_controller']   = $dir . 'mywp.controller.module.acf.php';
+    $includes['acf_main_general']     = $dir . 'mywp.controller.module.main.general.php';
+    $includes['acf_updater']          = $dir . 'mywp.controller.module.updater.php';
+    $includes['acf_controller']       = $dir . 'mywp.controller.module.acf.php';
+    $includes['acf_posts_controller'] = $dir . 'mywp.controller.module.posts.php';
 
     return $includes;
 
