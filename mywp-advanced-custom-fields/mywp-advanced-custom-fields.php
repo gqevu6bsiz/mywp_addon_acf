@@ -3,7 +3,7 @@
 Plugin Name: My WP Add-on Advanced Custom Fields
 Plugin URI: https://mywpcustomize.com/add_ons/my-wp-add-on-acf/
 Description: My WP Add-on Advanced Custom Fields is customize for Posts and setting Posts on My WP.
-Version: 1.3.0
+Version: 1.3.1
 Author: gqevu6bsiz
 Author URI: https://mywpcustomize.com/
 Text Domain: mywp-acf
@@ -32,7 +32,7 @@ final class MywpACF {
   private static function define_constants() {
 
     define( 'MYWP_ACF_NAME' , 'My WP Add-On Advanced Custom Fields' );
-    define( 'MYWP_ACF_VERSION' , '1.3.0' );
+    define( 'MYWP_ACF_VERSION' , '1.3.1' );
     define( 'MYWP_ACF_PLUGIN_FILE' , __FILE__ );
     define( 'MYWP_ACF_PLUGIN_BASENAME' , plugin_basename( MYWP_ACF_PLUGIN_FILE ) );
     define( 'MYWP_ACF_PLUGIN_DIRNAME' , dirname( MYWP_ACF_PLUGIN_BASENAME ) );

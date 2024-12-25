@@ -187,13 +187,15 @@ final class MywpControllerModuleAcfPosts extends MywpControllerAbstractModule {
 
     add_action( "manage_{$typenow}_posts_custom_column" , array( __CLASS__ , 'manage_column_body' ) , 10 , 2 );
 
-    add_filter( 'mywp_controller_admin_posts_custom_search_filter_fields-' . self::$post_type , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter_fields' ) );
+    add_filter( 'mywp_controller_admin_posts_get_post_statuses' , array( __CLASS__ , 'mywp_controller_admin_posts_get_post_statuses' ) , 9 , 2 );
 
-    add_action( 'mywp_controller_admin_posts_custom_search_filter-' . self::$post_type , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter' ) , 10 , 2 );
+    add_filter( 'mywp_controller_admin_posts_custom_search_filter_fields-' . self::$post_type , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter_fields' ) , 9 );
 
-    add_action( 'mywp_controller_admin_posts_custom_search_filter_form_field_content' , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter_form_field_content' ) );
+    add_action( 'mywp_controller_admin_posts_custom_search_filter-' . self::$post_type , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter' ) , 9 , 2 );
 
-    add_filter( 'mywp_controller_admin_posts_custom_search_filter_fields_after-' . self::$post_type , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter_fields_after' ) , 10 , 2 );
+    add_action( 'mywp_controller_admin_posts_custom_search_filter_form_field_content' , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter_form_field_content' ) , 9 );
+
+    add_filter( 'mywp_controller_admin_posts_custom_search_filter_fields_after-' . self::$post_type , array( __CLASS__ , 'mywp_controller_admin_posts_custom_search_filter_fields_after' ) , 9 , 2 );
 
   }
 
@@ -264,6 +266,18 @@ final class MywpControllerModuleAcfPosts extends MywpControllerAbstractModule {
     }
 
     self::after_do_function( __FUNCTION__ );
+
+  }
+
+  public static function mywp_controller_admin_posts_get_post_statuses( $post_statuses , $post_type ) {
+
+    if( isset( $post_statuses['acf-disabled'] ) ) {
+
+      unset( $post_statuses['acf-disabled'] );
+
+    }
+
+    return $post_statuses;
 
   }
 
